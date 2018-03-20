@@ -12,6 +12,9 @@ Entrust is a succinct and flexible way to add Role-based Permissions to **Larave
 If you are looking for the Laravel 4 version, take a look [Branch 1.0](https://github.com/Zizaco/entrust/tree/1.0). It
 contains the latest entrust version for Laravel 4.
 
+forked from Zizaco/entrust
+https://github.com/Zizaco/entrust
+
 ## Contents
 
 - [Installation](#installation)
