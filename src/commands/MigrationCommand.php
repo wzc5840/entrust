@@ -42,6 +42,8 @@ class MigrationCommand extends Command
         $permissionRoleTable = Config::get('entrust.permission_role_table');
         $userForeignKey      = Config::get('entrust.user_foreign_key');
         $roleForeignKey      = Config::get('entrust.role_foreign_key');
+        $userKeyName         = Config::get('entrust.user_key_name');
+        $usersTable          = Config::get('entrust.users_table');
 
         $this->line('');
         $this->info( "Tables: $rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable" );
@@ -57,7 +59,7 @@ class MigrationCommand extends Command
             $this->line('');
 
             $this->info("Creating migration...");
-            if ($this->createMigration($rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable, $userForeignKey, $roleForeignKey)) {
+            if ($this->createMigration($rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable, $userForeignKey, $roleForeignKey, $userKeyName, $usersTable)) {
 
                 $this->info("Migration successfully created!");
             } else {
@@ -79,14 +81,14 @@ class MigrationCommand extends Command
      *
      * @return bool
      */
-    protected function createMigration($rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable, $userForeignKey, $roleForeignKey)
+    protected function createMigration($rolesTable, $roleUserTable, $permissionsTable, $permissionRoleTable, $userForeignKey, $roleForeignKey, $userKeyName, $usersTable)
     {
         $migrationFile = base_path("/database/migrations")."/".date('Y_m_d_His')."_entrust_setup_tables.php";
 
-        $userModel = Config::get('auth.providers.users.model');
-        $userModel = new $userModel;
-        $userKeyName = $userModel->getKeyName();
-        $usersTable  = $userModel->getTable();
+//        $userModel = Config::get('auth.providers.users.model');
+//        $userModel = new $userModel;
+//        $userKeyName = $userModel->getKeyName();
+//        $usersTable  = $userModel->getTable();
 
         $data = compact('rolesTable', 'roleUserTable', 'permissionsTable', 'permissionRoleTable', 'usersTable', 'userKeyName', 'userForeignKey', 'roleForeignKey');
 
